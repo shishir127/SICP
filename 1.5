@@ -1,0 +1,10 @@
+(define (p) (p))
+
+(define (test x y)
+	(if (= x 0)
+		0
+		y))
+
+(test 0 (p))
+
+The normal order evaluation will never end becuase of the recursive definition of the function p. The applicative order evaluation will never go into the infinite recursion. 
