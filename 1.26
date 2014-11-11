@@ -1,0 +1,1 @@
+Becuase the square function is not used, the interpreter ends up making a duplicate call to the expmod function. Because of the duplicate call, the recurrence relation is no longer {T(n)/2 + O(1)} and it becomes {2*T(n)/2 + O(1)}.
