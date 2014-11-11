@@ -1,0 +1,15 @@
+This is a recursive process
+(define (+ a b)
+	(if (= a 0)
+		b
+		(inc (+ (dec a) b))
+	)
+)
+
+This is iterative
+(define (+ a b)
+	( if (= a 0)
+		b
+		(+ (dec a) (inc b))
+	)
+)

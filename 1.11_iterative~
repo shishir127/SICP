@@ -1,0 +1,18 @@
+(define (func x)
+	(if (< x 3)
+	    3
+	    (func_iter a b c x)
+	)
+)
+
+(define (func_iter a b c x)
+	(if (>= a x)
+	    a
+	    (func_iter
+			(+ a (* 2 b) (* 3 c))
+			(a)
+			(b)
+			(- x 1)
+	    )
+	)
+)

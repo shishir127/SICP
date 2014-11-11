@@ -1,0 +1,18 @@
+(define (double x) (* 2 x))
+
+(define (halve x)
+ 	 (if (= (remainder x 3) 0)
+	     (/ x 2)
+	     -1
+	 )
+ )
+
+
+(define (multiply a b)
+		 (cond ((or (= a 0) (= b 0)) 0)
+		       ((= a 1) b)
+		       ((= b 1) a)
+		       ((= (remainder b 2) 0) (+ (multiply a (halve b)) (multiply a (halve b))))
+		       else (+ b (multiply a (halve (- b 1))) (multiply a (halve (- b 1))))
+		 )
+)

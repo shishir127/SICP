@@ -1,0 +1,3 @@
+(define (divides? dividend divisor)
+	(= (remainder dividend divisor) 0)
+)

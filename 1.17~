@@ -1,0 +1,7 @@
+ (define (double x) (* 2 x))
+ (define (halve x)
+ 	 (if (= (remainder x 3) 0)
+	     (/ x 2)
+	     -1
+	 )
+ )

@@ -1,0 +1,1 @@
+the shape of the count-change procedure is a binary tree. the number of steps is big theta 2^n, the memory required is big theta 2^(n-1).

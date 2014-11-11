@@ -1,0 +1,24 @@
+(define (abs x)
+		(if (< x 0)
+			(- 0 x)
+			x
+		)
+)
+
+(define (sqr x) (* x x))
+
+(define (improve guess x)
+			()
+)
+
+(define (good_enough? guess x)
+				(< (abs (- (* guess guess) x)) 0.0001)
+)
+
+(define (cube_root_itr guess x)
+				(if (good_enough? guess x)
+							guess
+							(cube_root_itr (improve guess x) x)
+				)
+
+(define (cube-root x) (cube_root_itr 1.0 x))

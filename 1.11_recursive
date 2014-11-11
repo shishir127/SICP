@@ -1,0 +1,10 @@
+(define (func x)
+	(if (< x 3)
+	     3
+	     (+
+		(func (- x 1))
+		(* 2 func (- x 2))
+		(* 3 func (- x 3))
+	     )
+	)
+)

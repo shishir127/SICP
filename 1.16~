@@ -1,0 +1,9 @@
+(define (exp a b)
+	(define (exp_iter count product power)
+		
+	)
+	(cond ((= b 0) 1)
+	      ((= b 1) a)
+	      (else (exp_iter 1 a b))
+	)
+)
