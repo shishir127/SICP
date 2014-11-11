@@ -1,0 +1,52 @@
+Before:
+1 ]=> sqrt 0.02
+
+;Value 15: #[compiled-procedure 15 ("arith" #xdc) #xf #x1f7367]
+
+1 ]=>
+
+;Value: .02
+
+1 ]=> sqrt 2000000
+
+;Value 15: #[compiled-procedure 15 ("arith" #xdc) #xf #x1f7367]
+
+1 ]=> 
+;Value: 2000000
+
+
+
+(define (improve guess x)
+	(average guess (/ x guess)))
+
+(define (average x y)
+	(/ (+ x y) 2))
+
+(define (abs x) (if (< x 0)
+			(- 0 x)
+			x
+		)
+)
+
+(define (good-enough? new_guess old_guess)
+	(< 
+		(/ (abs (- new_guess old_guess)) old_guess)
+	0.01)
+)
+
+
+(define (sqrt-iter guess x)
+	(if (good-enough? guess x)
+		guess
+		(sqrt-iter (improve guess x)
+				x)))
+
+1 ]=> 
+;Value: .02
+
+1 ]=> sqrt-iter 2000000
+
+;Value 17: #[compound-procedure 17 sqrt-iter]
+
+1 ]=> 
+;Value: 2000000

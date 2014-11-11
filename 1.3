@@ -1,8 +1,35 @@
-(define (sum of squares a b) (+ (* a a) (* b b)))
+(define (sum_of_squares a b) (+ (* a a) (* b b)))
 
-(define (proc a b c) (cond ((>= a b) and (>= a c))
-					(if (> b c) (sum_of_squares a b)
-						(sum_of_squares a c))
-				((>= b a) and (b >= c))
-							(if (> a c) (sum_of_squares b a))
-			))
+(define (sum_of_squares_of_larger_two a b c) 
+	(if (> a c) (if (> b c) (sum_of_squares a b)
+				(sum_of_squares a c)
+		    )
+		    (if (> a b) (sum_of_squares a c)
+				(sum_of_squares b c)
+		    )
+	)
+)
+
+1 ]=> (sum_of_squares_of_larger_two 2 3 4)
+
+;Value: 25
+
+1 ]=> (sum_of_squares_of_larger_two 2 4 3)
+
+;Value: 25
+
+1 ]=> (sum_of_squares_of_larger_two 3 2 4)
+
+;Value: 25
+
+1 ]=> (sum_of_squares_of_larger_two 4 3 2)
+
+;Value: 25
+
+1 ]=> (sum_of_squares_of_larger_two 3 4 2)
+
+;Value: 25
+
+1 ]=> (sum_of_squares_of_larger_two 4 2 3)
+
+;Value: 25
