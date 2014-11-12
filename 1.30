@@ -1,0 +1,20 @@
+(define (sum term a next b)
+	(define (iter n result)
+		(if (>= n b)
+		    0
+		    (iter (next n) (+ result (f n)) )
+		)
+	)
+	(iter a 0)
+)
+
+//for simpsons integral
+(define (sum term a next b)
+	(define (iter increment term result)
+		(if (>= (+ term increment) b)
+		    0
+		    (iter increment (+ term increment) (+ result (f (+ term increment))))
+		)
+	)
+	(iter (/ (- b a) n) a 0.0)
+)

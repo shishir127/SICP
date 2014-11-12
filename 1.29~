@@ -1,0 +1,34 @@
+(define (cube x)
+	(* x x x)
+)
+
+(define (next-even x)
+	()
+)
+
+(define	(sum f a next b)
+	(if (>= a b)
+	    0
+	    (sum f (next a) next b)
+	)
+)
+
+(define (simpsons-integral f a n b)
+	(let (h (/ (- b a) n))
+	)
+	(define (next-even x)
+		
+	)
+	(* (/ h 3)
+	   (+ (f a) (f b)
+	      (* 4
+	      	 (sum f (f (+ a h)) next-even (f (+ a (* h (- n 1))))
+		 )
+	      )
+	      (* 2
+	      	 (sum f (f (+ a (* h 2))) next-odd (f (+ a (* h (- n 2))))
+		 )
+	      )
+	   )
+	)
+)

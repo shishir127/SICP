@@ -1,0 +1,22 @@
+(define (next-term n)
+	(* (/ (+ 2.0 (* 2.0 n)) (+ 3.0 (* 2.0 n)))
+	   (/ (+ 4.0 (* 2.0 n)) (+ 3.0 (* 2.0 n)))
+	   (/ (+ 4.0 (* 2.0 n)) (+ 5.0 (* 2.0 n)))
+	)
+)
+
+(define (product f a b)
+	(define (iter n product)
+		(if (> n b)
+		    1.0
+		    (iter (+ n 1) (* product (f n)))
+		)
+	)
+	(iter (- b a) 1.0)
+)
+
+(define (approx-pi n f)
+	(* 4.0 (product f 0 n))
+)
+
+(approx-pi 10000 next-term)

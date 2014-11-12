@@ -1,0 +1,9 @@
+(define (product f a next b)
+	(define (iter n product)
+		(if (>= n b)
+		    1.0
+		    (iter n (product * f))
+		)
+	)
+	(iter (- b a) 1.0)
+)

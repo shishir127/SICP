@@ -1,0 +1,15 @@
+(define (accumulate combiner identity term a next b)
+	(define (iter n accumulator)
+		(if (> n b)
+		    identity
+		    (iter (next n) (combiner accumulator (term n)))
+		)
+	)
+	(iter a identity)
+)
+
+(define (sum term a next b)
+	(accumulate (+) 0 term a next b)
+)
+
+(sum (lambda (x) (+ 0 x)) 1 (lambda (x) (+ x 1)) 10)
