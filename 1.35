@@ -11,4 +11,7 @@
 
 (define (golden-ratio x) (+ 1.0 (/ 1.0 x)))
 
-(fixed-point golden-ratio 1.0)
+
+
+> (fixed-point golden-ratio 1.0)
+1.6180327868852458

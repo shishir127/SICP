@@ -8,7 +8,7 @@
 (define (product f a b)
 	(define (iter n product)
 		(if (> n b)
-		    1.0
+		    product
 		    (iter (+ n 1) (* product (f n)))
 		)
 	)
@@ -19,4 +19,7 @@
 	(* 4.0 (product f 0 n))
 )
 
-(approx-pi 10000 next-term)
+> (approx-pi 10000 next-term)
+3.999800039991002
+> (approx-pi 1000000 next-term)
+3.999998000004

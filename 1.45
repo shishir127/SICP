@@ -30,11 +30,76 @@
 (define (average-damp f)
   (lambda (x) (average x (f x))))
 
+(define (n-average a avg n)
+	(if (<= n 1)
+	    (/ (+ a avg) 2)
+	    (n-average a 
+		       (/ (+ a avg) 2)
+		       (- n 1)
+	    )
+	)
+)
+
+(define (n-damping f n)
+	(lambda (x)
+        	(n-average x (f x) n)
+        )
+)
+
 (define (n-root num n)
         (fixed-point (average-damp 
-                                   (lambda (x) (/ num (power x (n - 1)))
+                                   (lambda (x) (/ num (power x (- n 1)))
                                    )
                      )
                      1.0
         )
 )
+
+(define (n-root num n)
+        (fixed-point (n-damping    (lambda (x) (/ num (power x (- n 1)))
+                                   )
+				   n
+                     )
+                     1.0
+        )
+)
+
+//With normal damping.Called n-root which uses average damping
+> (n-root 4.0 2)
+2.000000000000002
+> (n-root 9.0 3)
+3.0
+> (n-root 16 4)
+4.000000000000051
+> (n-root 32 5)
+5.65685424949238
+> (n-root 64 6)
+8.00000000000017
+> (n-root 128 7)
+11.31370849898476
+> (n-root 256 8)
+16.00000000000039
+> (n-root 512 9)
+22.62741699796952
+> (n-root 1024 10)
+32.0000000000008
+
+//using n-root with the n-damping is not noticeably better
+> (n-root 4 2)
+1.999993326908296
+> (n-root 8 3)
+2.8284036794029337
+> (n-root 16 4)
+3.9999351513314823
+> (n-root 32 5)
+5.656704559568814
+> (n-root 64 6)
+7.999695913619938
+> (n-root 128 7)
+11.3130873436326
+> (n-root 256 8)
+15.998736806632985
+> (n-root 512 9)
+22.624873290958185
+> (n-root 1024 10)
+31.99489244691457

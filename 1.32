@@ -1,7 +1,7 @@
 (define (accumulate combiner identity term a next b)
 	(define (iter n accumulator)
 		(if (> n b)
-		    identity
+		    accumulator
 		    (iter (next n) (combiner accumulator (term n)))
 		)
 	)
@@ -16,4 +16,9 @@
 	(accumulate (lambda (x y) (* x y)) 1.0 term a next b)
 )
 
-(sum (lambda (x) (+ 0 x)) 1 (lambda (x) (+ x 1)) 10)
+> (sum (lambda (x) (+ 0 x)) 1 (lambda (x) (+ x 1)) 10)
+55
+> (product (lambda (x) (* 2 x)) 1 (lambda (x) (+ x 1)) 3)
+48.0
+> (product (lambda (x) (* 1 x)) 1 (lambda (x) (+ x 1)) 3)
+6.0

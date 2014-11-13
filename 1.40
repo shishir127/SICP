@@ -21,7 +21,7 @@
 )
 
 
-
+//Examples lifted from some university's online material. roots given by newtons-method check out with the lifted material but precision is a bit off.
 > (newtons-method (cubic 4.0 -1.0 -6.0) 1)
 1.1774096808996184
 > (newtons-method (cubic -5.0 -2.0 24.0) 1)

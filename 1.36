@@ -4,10 +4,14 @@
     (< (abs (- v1 v2)) tolerance))
   (define (try guess)
     (let ((next (f guess)))
-      (if (close-enough? guess next)
+      ((display next)
+       (newline)
+       if (close-enough? guess next)
           next
 	  ((try next))))
   (try first-guess)))
+
+(define (average a b) (/ (+ a b) 2))
 
 (define (average-damp f)
   (lambda (x) (average x (f x))))
@@ -15,3 +19,6 @@
 (define (self-exponentiation x)
 	(/ (log 1000) (log x))
 )
+
+//stack overflow
+(fixed-point (average-damp (lambda (x) (/ (log 1000) (log x)))) 1.0)

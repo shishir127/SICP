@@ -1,0 +1,67 @@
+(define (filtered-accumulate combiner identity filter term a next b)
+	(define (iter n accumulator)
+		(cond ((> n b) accumulator)
+		      ((not (filter n)) (iter (next n) accumulator))
+		      (else (iter (next n) (combiner accumulator (term n))))
+		)
+	)	
+	(iter a identity)
+)
+
+(define square-proc (lambda (x) (* x x)))
+
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (square x) (* x x))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (+ test-divisor 1)))))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+(define (prime? n)
+  (= n (smallest-divisor n)))
+
+(define (gcd a b)
+	(if (= b 0)
+	    a
+  	    (gcd b (remainder a b))
+	)
+)
+
+(define (relative-prime? a b)
+	(= (gcd a b) 1)
+)
+
+(define (sum-prime-squares a b)
+	(filtered-accumulate (lambda (x y) (+ x y)) 
+			     0 
+			     prime?
+			     square-proc
+			     a
+			     (lambda (x) (+ x 1))
+			     b
+	)
+)
+
+(define (product-relative-prime n)
+	(filtered-accumulate (lambda (x y) (* x y)) 
+			     1.0 
+			     (lambda (x) (relative-prime? x n))
+			     (lambda (x) (+ 0 x))
+			     1
+			     (lambda (x) (+ x 1))
+			     (- n 1)
+	)
+)
+
+> (sum-prime-squares 2 5)
+38
+> (product-relative-prime 4)
+3.0
+> (product-relative-prime 5)
+24.0
