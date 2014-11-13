@@ -1,0 +1,40 @@
+#lang racket
+
+(define tolerance 0.00001)
+
+(define (close-enough? x y)
+  (< (abs (- x y)) 0.001))
+
+(define (fixed-point f first-guess)
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (try next))))
+  (try first-guess))
+
+(define (power base exp)
+	(define (iter count product)
+		(if (>= count 1)
+		    product
+		    (iter (- count 1) (* product base))
+		)
+	)
+	(iter exp base)
+)
+
+(define (average a b) (/ (+ a b) 2))
+
+(define (average-damp f)
+  (lambda (x) (average x (f x))))
+
+(define (n-root num n)
+        (fixed-point (average-damp 
+                                   (lambda (x) (/ num (power x (n - 1)))
+                                   )
+                     )
+                     1.0
+        )
+)
