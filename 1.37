@@ -1,0 +1,31 @@
+(define (cont-frac n d k)
+	(define (iter count fraction)
+		      (if (> count k)
+		      	  fraction
+			  (iter (+ 1 count) (/ (n count)
+			  	     	       (+ (d count) fraction)
+					    )
+			  )
+		      )
+	)
+	(iter 1 0.0)
+)
+
+
+
+> (cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           100)
+0.6180339887498948
+> (cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           1000)
+0.6180339887498948
+> (cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           1000000)
+0.6180339887498948
+> (cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           1000000000)
+0.6180339887498948

@@ -1,0 +1,22 @@
+(define (denominator n) (- (* 2 n) 1))
+
+(define (cont-frac n d k)
+	(define (iter count fraction)
+		      (if (> count k)
+		      	  fraction
+			  (iter (+ 1 count) (/ (n count)
+			  	     	       (+ (d count) fraction)
+					    )
+			  )
+		      )
+	)
+	(iter 1 0.0)
+)
+
+(define (tan-cf x k)
+	(cont-frac (lambda (n) x) denominator k)
+)
+
+//1.04719755 ~= 60degrees. tan 60 = sqrt 3
+> (square (tan-cf 1.04719755 1000000))
+2.741559513372398e-13

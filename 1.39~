@@ -1,0 +1,15 @@
+(define (denominator n)
+)
+
+(define (cont-frac n d k)
+	(define (iter count fraction)
+		      (if (> count k)
+		      	  fraction
+			  (iter (+ 1 count) (/ (n count)
+			  	     	       (+ (d count) fraction)
+					    )
+			  )
+		      )
+	)
+	(iter 1 0.0)
+)

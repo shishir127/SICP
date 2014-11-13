@@ -1,0 +1,16 @@
+(define (compose proc1 proc2)
+	(lambda (x)
+		(proc1 (proc2 x))
+	)
+)
+
+(define (square x) (* x x))
+
+(define (inc x) (+ x 1))(define (compose proc1 proc2)
+	(lambda (x)
+		(proc1 (proc2 x))
+	)
+)
+
+> ((compose square inc) 6)
+49
