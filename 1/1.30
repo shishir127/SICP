@@ -10,11 +10,13 @@
 
 //for simpsons integral
 (define (sum term a next b)
-	(define (iter increment term result)
+	(let (increment (/ (- b a) n))
+	(define (iter term result)
 		(if (>= (+ term increment) b)
 		    0
-		    (iter increment (+ term increment) (+ result (f (+ term increment))))
+		    (iter (+ term increment) (+ result (+ term increment)))
 		)
 	)
-	(iter (/ (- b a) n) a 0.0)
+	(iter  a 0.0)
+	)
 )
