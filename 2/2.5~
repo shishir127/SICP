@@ -1,0 +1,5 @@
+(define (car a b)
+	(* (pow 2 a)
+	   (pow 3 b)
+	)
+)

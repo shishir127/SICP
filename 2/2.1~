@@ -1,0 +1,15 @@
+(define (gcd a b)
+	(if (= b 0)
+	    a
+	    gcd(b (remainder a b))
+	)
+)
+
+(define (abs x) (if (< 0 x)
+		    (- 0 x)
+		    x
+		)
+)
+
+(define (make-rat n d)
+)

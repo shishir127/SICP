@@ -1,0 +1,9 @@
+(define (last-pair input-list)
+	(if (null? (cdr input-list))
+	    (car input-list)
+	    (last-pair (cdr input-list))
+	)
+)
+
+> (last-pair (list 1 2 3 4))
+4

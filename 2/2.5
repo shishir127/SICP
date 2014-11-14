@@ -1,0 +1,42 @@
+(define (pow base exp)
+	(define (iter count product)
+		(if (= count exp)
+		    product
+		    (iter (+ count 1) (* product base))
+		)
+	)
+	(iter 1 base)
+)
+
+(define cons-prime-1 2)
+(define cons-prime-2 3)
+
+(define (int-cons a b)
+	(* (pow cons-prime-1 a)
+	   (pow cons-prime-2 b)
+	)
+)
+
+(define (int-car pair)
+	(if (= (remainder pair cons-prime-2) 0)
+	    (/ (log pair) (log cons-prime-1))
+	    (int-car (/ pair cons-prime-2))
+	)
+)
+
+(define (int-cdr pair)
+	(if (= (remainder pair cons-prime-1) 0)
+	    (/ (log pair) (log cons-prime-2))
+	    (int-cdr (/ pair cons-prime-1))
+	)
+)
+
+> (define test (int-cons 1 2))
+> (int-car test)
+4.169925001442312
+> (int-cdr test)
+2.630929753571457
+> (pow 2 2)
+4
+> (pow 4 3)
+64

@@ -1,0 +1,9 @@
+(define (reverse input-list)
+	(define iter(input output)
+		(if (null? (cdr input))
+		    output
+		    (iter (cdr input) (cons (car input) output))
+		)
+	)
+	(iter input-list nil)
+)
