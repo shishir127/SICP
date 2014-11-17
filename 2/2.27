@@ -1,0 +1,12 @@
+(define (deep-reverse input-list)
+	(define (iter input output)
+		(cond ((null? input) output)
+		      ((list? (car input)) (iter (cdr input) (cons (deep-reverse (car input)) output)))
+		      (else (iter (cdr input) (cons (car input) output)))
+                )
+	)
+	(iter input-list null)
+)
+
+> (deep-reverse x)
+'((4 3) (2 1))

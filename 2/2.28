@@ -1,0 +1,24 @@
+(define (add-to-end x element)
+	(cond ((and (null? x) (not (list? element)))    (list element))
+              ((and (null? x) (list? element))      element)
+              ((list? element)    (append x element))
+	      (else (append x (cons element null)))
+        )
+)
+  
+(define (fringe tree)
+	(define (iter input output)
+		(cond ((null? input) output)
+		      ((list? (car input)) (iter (cdr input) (add-to-end output (iter (car input) null))))
+		      (else (iter (cdr input) (add-to-end output (car input))))
+		)
+	)
+	(iter tree null)
+)
+
+(define x (list (list 1 2) (list 3 4)))
+
+
+
+> (fringe x)
+'(1 2 3 4)

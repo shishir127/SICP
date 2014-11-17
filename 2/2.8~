@@ -1,0 +1,20 @@
+Let (u1,l1) & (u2,l2) be the upper and lower bounds of the two quantities.
+
+In case of addition of bounds:
+new width = (u1 + u2 - l2 - l1)/2
+	= (w1 + w2)
+
+
+In case of subtraction of bounds:
+case 1:
+	new width = [(u1 - l1) - (l1 - u2)]/2
+		= w1 + w2
+case 2:
+	new width = [(u1 - l2) - (l2 - u1)]/2
+		= w1 + (l1/2) + w2 - (u2/2)
+case 3:
+	new width = [(u2 - l2) - (l1 - u2)]/2
+		= w2 + (l2/2) + w1 - (l1/2)
+case 4:
+	new width = [(u2 - l1) - (l2 - u1)]/2
+		= w2 + w1

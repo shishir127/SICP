@@ -1,0 +1,51 @@
+(define (make-mobile left right)
+  (list left right))
+
+(define (make-branch length structure)
+  (list length structure))
+
+(define (left-branch mobile)
+	(car mobile)
+)
+
+
+(define (right-branch mobile)
+	(car (cdr mobile))
+)
+
+
+(define (branch-length branch)
+	(car branch)
+)
+
+(define (branch-structure branch)
+	(car (cdr branch))
+)
+
+(define (total-weight mobile)
+	(let ((left (branch-structure (left-branch mobile)))
+	      (right (branch-structure (right-branch mobile)))
+	     )
+	     (cond ((and (list? left) (list? right))    (+ (total-weight left) (total-weight right)))
+	     	   ((and (list? left) (not (list? right)))    (+ (total-weight left) right))
+		   ((and (not (list? left)) (list? right))    (+ left (total-weight right)))
+		   ((and (not (list? left) (not (list? right))))    (+ left right))
+	     )
+	)
+)
+
+(define (balanced branch)
+	(let (left (left-branch branch))
+	     (right (right-branch branch))
+	)
+	(= (* (total-weight (branch-structure left))
+	      (branch-length left)
+	   )
+	   (* (total-weight (branch structure right))
+	      (branch-length right)
+	   )
+	)
+)
+
+> (total-weight big-one)
+6

@@ -1,0 +1,13 @@
+(define (square x) (* x x))
+
+(define (square-list items)
+  (if (null? items)
+      nil
+      (cons () ())
+  )
+)
+
+
+(define (square-list items)
+  (map <??> <??>)
+)

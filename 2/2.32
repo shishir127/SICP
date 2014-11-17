@@ -1,0 +1,11 @@
+(define (subsets s)
+  (if (null? s)
+      (list nil)
+      (let ((rest (subsets (cdr s))))
+        (append rest (map (lambda (x) (cons (car s) x)) rest)))))
+
+
+> (subsets (list 1 2 3))
+'(() (3) (2) (2 3) (1) (1 3) (1 2) (1 2 3))
+
+The function subsets works by first adding an empty set to the set of subsets. Then a union of the subsets and each element, taken one at a time, leads to complete set of subsets.
