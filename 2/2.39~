@@ -1,0 +1,5 @@
+(define (reverse sequence)
+  (fold-right (lambda (x y) (cons y x)) null sequence))
+  
+(define (reverse sequence)
+  (fold-left (lambda (x y) ()) null sequence))

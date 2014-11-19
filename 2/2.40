@@ -1,0 +1,41 @@
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+      (op (car sequence)
+          (accumulate op initial (cdr sequence)))))
+
+(define (enumerate-interval a b)
+	(define (interval start end seq)
+		(if (= end start)
+		    (cons start seq)
+		    (interval start (- end 1) (cons end seq))
+		)
+	)
+	(if (> a b)
+	    (interval b a null)
+	    (interval a b null)
+	)
+)
+
+(define (sum-of-list input)
+	(define (sum-iter input output)
+		(if (null? input)
+		    output
+		    (sum-iter (cdr input) (+ output (car input)))
+		)
+	)
+	(sum-iter input 0)
+)
+
+(define (unique-pairs n)
+	(accumulate append
+            null
+            (map (lambda (i)
+                   (map (lambda (j) (list i j))
+                        (enumerate-interval i n)))
+                 (enumerate-interval 1 n))
+         )
+)
+
+> (unique-pairs 4)
+'((1 1) (1 2) (1 3) (1 4) (2 2) (2 3) (2 4) (3 3) (3 4) (4 4))

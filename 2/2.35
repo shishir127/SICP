@@ -1,0 +1,31 @@
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+      (op (car sequence)
+          (accumulate op initial (cdr sequence)))))
+
+(define (get-leaves tree)
+	(cond((pair? tree)     (append (get-leaves (car tree)) (get-leaves (cdr tree))))
+	    ((null? tree)     null)
+            (else     (list tree))
+	)
+)
+
+(define (count-leaves t)
+  (accumulate (lambda (x y) (+ 1 y))
+  	      0
+	      (get-leaves t)
+  )
+)
+
+(define (length sequence)
+  (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
+
+(list (list 1 2) (list 3 4))
+
+
+> (define test (list (list 1 2) (list 3 4)))
+> (count-leaves test)
+4
+> (get-leaves test)
+'(1 2 3 4)

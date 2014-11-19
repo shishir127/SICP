@@ -1,0 +1,57 @@
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+      (op (car sequence)
+          (accumulate op initial (cdr sequence)))))
+
+(define (flatmap proc seq)
+  (accumulate append null (map proc seq)))
+
+(define (sum-of-list s)
+        (if (null? s)
+            null
+            (accumulate + 0 s)
+        )
+)
+
+(define (enumerate-interval low high)
+  (if (> low high)
+      null
+      (cons low (enumerate-interval (+ low 1) high))
+  )
+)
+
+(define (unique-pairs a b)
+	(accumulate append
+            null
+            (map (lambda (i)
+                   (map (lambda (j) (list i j))
+                        (enumerate-interval i b)))
+                 (enumerate-interval a b)
+            )
+         )
+)
+
+(define (gen-triplets n)
+	(accumulate append
+		    null
+		    (map (lambda (x) (map (lambda (y) (cons x y))
+                                          (unique-pairs x n)
+                                     )
+		    	 )
+			 (enumerate-interval 1 n)
+		    )
+	)
+)
+
+(define (sum-of-triplets sum n)
+        (accumulate (lambda (x y)
+                                 (if (= (sum-of-list x) sum)
+                                     (cons x y)
+                                     y
+                                 )
+                    )
+                    null
+                    (gen-triplets n)
+        )
+)

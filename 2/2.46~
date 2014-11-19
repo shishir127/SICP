@@ -1,0 +1,11 @@
+(define (make-vect x y)
+	(cons x y)
+)
+
+(define (xcor-vect vec)
+	(car vec)
+)
+
+(define (ycor-vect vec)
+	(cdr vec)
+)

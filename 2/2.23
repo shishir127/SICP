@@ -1,0 +1,6 @@
+(define (for-each func seq)
+	(if (null? (cdr seq))
+	    (func (car seq))
+	    (and (func (car seq)) (for-each func (cdr seq)))
+	)
+)

@@ -1,0 +1,7 @@
+(define (count-leaves t)
+  (accumulate (lambda (x y) (+ (length x) (length y))) 0 (map (lambda (x) (not (list? x))) t)))
+
+(define (length sequence)
+  (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
+
+(list (list 1 2) (list 3 4))

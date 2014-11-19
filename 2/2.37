@@ -1,0 +1,66 @@
+(define (add-to-list x y)
+	(cond ((and (not (list? x)) (not (list? y)))     (list x y))
+	      ((and (not (list? x)) (list? y))     (cons x y))
+	      ((and (list? x) (not (list? y)))     (append x (cons y null)))
+	)
+)
+
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+      (op (car sequence)
+          (accumulate op initial (cdr sequence)))))
+
+(define (get-first seq)
+	(map (lambda (x) (car x))
+	     seq
+	)
+)
+
+(define (truncate-first-member seq)
+	(map (lambda (x) (cdr x))
+	     seq
+	)
+)
+
+(define (accumulate-n op init seqs)
+  (if (null? (car seqs))
+      null
+      (cons (accumulate op init (get-first seqs))
+            (accumulate-n op init (truncate-first-member seqs)))))
+
+(define (dot-product v w)
+	(accumulate + 0 (map * v w))
+)
+
+(define (weighted-sum row matrix)
+	(if(null? matrix)
+	   null
+           (add-to-list (accumulate + 0 (accumulate-n * 1 (list row (car matrix))))
+	     		(weighted-sum row (cdr matrix))
+	   )
+	)	
+)
+
+(define (transpose mat)
+  (accumulate-n add-to-list null mat))
+
+(define (matrix-*-vector m v)
+  (map (lambda (x) (accumulate-n add-to-list null (append v x))) m))
+
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+    (map (lambda (x) (weighted-sum x cols)) m)))
+
+(define test (list (list 1 2 3 4) (list 4 5 6 6) (list 6 7 8 9)))
+
+(define test2 (list (list 1 2 3) (list 4 5 6) (list 7 8 9) (list 10 11 12)))
+
+(define vector (list 1 2 3 4))
+
+> (transpose test)
+'((1 4 6) (2 5 7) (3 6 8) (4 6 9))
+> (matrix-*-vector test vector)
+'((1 4 9 16) (4 10 18 24) (6 14 24 36))
+> (matrix-*-matrix test test2)
+'((70 80 90) (126 147 168) (180 210 240))
