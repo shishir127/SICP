@@ -1,0 +1,32 @@
+(define (semaphore n)
+  (let ((active-processes 0)
+       )
+    (define (test-and-set!)
+      (if (>= active-processes n)
+	  true
+	  (begin (+ active-processes 1)
+		 false
+	  )
+      )
+    )
+    (define (release)
+      (cond ((> active-processes 1)     (- active-processes 1))
+	    ((= active-processes 1)     (set! active-processes 0))
+      )
+      )
+    (define (dispatch msg)
+      (cond ((eq? msg 'acquire)     (if (test-and-set!)
+					(dispatch 'acquire)
+					true
+				    )
+	    ((eq? msg 'release)     (begin (release)
+					   true
+				    )
+	    )
+	    )
+	    (else     (display "Unknown input"))
+      )
+    )
+    dispatch
+  )
+)

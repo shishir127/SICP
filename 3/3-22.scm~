@@ -1,0 +1,29 @@
+(define (make-queue)
+  (let ((pointers (cons () ()))
+	(head (car cons))
+        (tail (cdr cons)))
+    (define empty?
+      (null? head)
+    )
+    (define peek
+      head
+    )
+    (define (en-q element)
+      ()
+    )
+
+    (define (de-q)
+      (cond ((null? head)     (display "Queue is empty!"))
+	    ((eq? head tail)  )
+	  (let ((de-q-element (car head))
+	       )
+	    (begin (set! head (cdr head))
+		   de-q-element
+	    )
+	  )
+      )
+    )
+    
+    (define (dispatch m) ...)
+    dispatch)
+)

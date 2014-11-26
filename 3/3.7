@@ -1,0 +1,43 @@
+(define (make-account balance pswd)
+  (define (withdraw amount)
+    (if (>= balance amount)
+        (begin (set! balance (- balance amount))
+               balance)
+        "Insufficient funds"))
+  (define (deposit amount)
+    (set! balance (+ balance amount))
+    balance)
+  (define (dispatch msg1 msg2)
+    (cond ((not (eq? msg1 pswd))    (error "Incorrect password"))
+	  ((eq? msg2 'withdraw)     withdraw)
+          ((eq? msg2 'deposit)     deposit)
+          (else     (error "Unknown request -- MAKE-ACCOUNT"
+                       msg2))))
+  dispatch
+)
+
+
+(define (make-joint acc pswd user2-pswd)
+	(let ((withdraw      (acc pswd 'withdraw))
+	      (deposit      (acc pswd 'deposit))
+	     )
+	     (define (dispatch msg1 msg2)
+		(cond ((not (eq? msg1 user2-pswd))    (error "Incorrect password"))
+		      ((eq? msg2 'withdraw)     withdraw)
+		      ((eq? msg2 'deposit)     deposit)
+		      (else	  (error "Unknown request -- MAKE-ACCOUNT"
+						msg2))
+		)
+	     )
+	     dispatch
+	)
+)
+
+(define primary (make-account 1000 'spongebob))
+(define nominee (make-joint primary 'spongebob 'patrick))
+((primary 'spongebob 'withdraw) 100)
+((nominee 'patrick 'withdraw) 100)
+
+900
+800
+> 

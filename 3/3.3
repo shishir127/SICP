@@ -1,0 +1,27 @@
+(define (make-account balance pswd)
+  (define (withdraw amount)
+    (if (>= balance amount)
+        (begin (set! balance (- balance amount))
+               balance)
+        "Insufficient funds"))
+  (define (deposit amount)
+    (set! balance (+ balance amount))
+    balance)
+  (define (dispatch msg1 msg2)
+    (cond ((not (eq? msg1 pswd))    (error "Incorrect password"))
+	  ((eq? msg2 'withdraw)     withdraw)
+          ((eq? msg2 'deposit)     deposit)
+          (else     (error "Unknown request -- MAKE-ACCOUNT"
+                       msg2))))
+  dispatch
+)
+
+
+(define test (make-account 2000 'spongebob))
+((test 'spongebob 'withdraw) 20)
+((test 'spongebob 'deposit) 20)
+((test 'sponge 'withdraw) 20)
+1980
+2000
+. . Incorrect password
+> 

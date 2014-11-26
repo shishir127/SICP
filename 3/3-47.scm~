@@ -1,0 +1,17 @@
+(define (semaphore n)
+  (let ((cell (list false))
+	(active-processes 0)
+       )
+    (define (test-and-set!)
+      (if (and (car cell) (>= active-processes n))
+	  true
+	  (begin (set-car! cell true)
+		 (+ active-processes 1)
+		 false
+	  )
+      )
+    )
+    (define (release)
+    )
+  )
+)

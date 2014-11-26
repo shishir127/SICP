@@ -1,0 +1,68 @@
+(define (make-account balance pswd)
+  (let ((wrong-pswd-access-count 0))
+	(define (withdraw amount)
+		(if (>= balance amount)
+		(begin (set! balance (- balance amount))
+			balance)
+		 "Insufficient funds"))
+	(define (deposit amount)
+		(set! balance (+ balance amount))
+		balance)
+	(define (call-the-cops)
+		(begin (display "roger that")
+                       (newline)
+                )
+	)
+        (define (correct-pswd-response)
+                (set! wrong-pswd-access-count 0)
+        )
+	(define (wrong-pswd-response arg)
+		(begin (if (>= wrong-pswd-access-count 6)
+			   (begin (correct-pswd-response)
+				  (call-the-cops)
+			   )
+			   (set! wrong-pswd-access-count (+ 1 wrong-pswd-access-count))
+		       )
+		       (begin (display "Incorrect password")
+                              (newline)
+                       )
+		)
+	)
+	(define (dispatch msg1 msg2)
+		(cond ((not (eq? msg1 pswd))    wrong-pswd-response)
+			((eq? msg2 'withdraw)     (begin (correct-pswd-response)
+                                                         withdraw
+                                                  )
+                        )
+			((eq? msg2 'deposit)     (begin (correct-pswd-response)
+                                                        deposit
+                                                 )
+                        )
+			(else     (error "Unknown request -- MAKE-ACCOUNT"
+					msg2))))
+	dispatch
+  )
+)
+
+
+(define test (make-account 2000 'spongebob))
+((test 'spongebob 'withdraw) 20)
+((test 'spongebob 'deposit) 20)
+((test 'sponge 'withdraw) 20)
+((test 'sponge 'withdraw) 20)
+((test 'sponge 'withdraw) 20)
+((test 'sponge 'withdraw) 20)
+((test 'sponge 'withdraw) 20)
+((test 'sponge 'withdraw) 20)
+((test 'sponge 'withdraw) 20)
+
+1980
+2000
+Incorrect password
+Incorrect password
+Incorrect password
+Incorrect password
+Incorrect password
+Incorrect password
+roger that
+Incorrect password

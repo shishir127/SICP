@@ -1,0 +1,16 @@
+(define (integral-cooefficients)
+  (define (iter n)
+    (cons-stream (/ 1 n) (iter (+ n 1)))
+  )
+  (iter 1)
+)
+
+(define (mul-streams s1 s2)
+  (cons-stream (* (car-stream s2) (car-stream s1))
+	       (mul-streams (cdr-stream s1) (cdr-stream s2))
+  )
+)
+
+(define (integrate-series series)
+  (cons-stream c (mul-streams series integral-cooefficients))
+)

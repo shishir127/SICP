@@ -1,0 +1,10 @@
+(define (l-to-r-list args)
+)
+
+(define (list-of-values . args)
+
+  (if (null? args)
+      null
+      (iter args null)
+  )
+)

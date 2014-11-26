@@ -1,0 +1,23 @@
+(define (make-accumulator sum)
+	(define (add num)
+		(begin (set! sum (+ sum num))
+                       sum
+                )
+	)
+	(define (remove num)
+		(set! sum (- sum num))
+	)
+	(define (dispatch msg)
+		(cond ((eq? msg 'add)     add)
+		      ((eq? msg 'remove)     remove)
+		      (else (error "Unknown request -- MAKE_ACCUMULATOR" msg))
+		)
+	)
+	add
+)
+
+(define test (make-accumulator 1))
+(test 2)
+(test 3)
+(test 4)
+(test 5)

@@ -1,0 +1,54 @@
+(define (tree-map func tree)
+	(cond((null? tree)     null)
+	     ((list? (car tree))     (cons (tree-map func (car tree)) (tree-map func (cdr tree))
+	     	     	  	     )
+	     )
+	     (else (cons (func (car tree)) (tree-map func (cdr tree))))
+	)
+)
+
+(define (initialize seq)
+  (tree-map (lambda (x) (cons x false)) seq)
+)
+
+(define (visited? node)
+  (if (pair? node)
+      (cdr node)
+      null
+  )
+)
+
+(define (visit node)
+  (set-cdr! node true)
+)
+
+(define (bfs q)
+  (let ((node (car q)
+       )
+    (cond ((visited? node)     false)
+	  ((null? node)     true)
+	  (else 
+	                (begin (visit node)
+			       (delete-queue! q)
+			       (cond ((pair? (car node))     (and (insert-queue! (car (car node)) (insert-queue! (cdr (car node))))))
+			       (bfs q)
+	                )
+	  )
+    )
+  )
+)
+
+
+(define (contains-cycle? seq)
+  (let ((q (make-queue))
+	(s (initialize seq))
+       )
+    (begin (en-q q (car s))
+	   (if (= (bfs q (cdr s)) true)
+	       false
+	       true
+	   )
+    )
+  )
+)
+
