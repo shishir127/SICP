@@ -1,0 +1,26 @@
+(define rows
+  (list 1 2 3 4 5 6 7 8)
+)
+
+(define columns
+  (list 1 2 3 4 5 6 7 8)
+)
+
+(define (eight-queens)
+  (let ((betty (amb 1 2 3 4 5))
+        (ethel (amb 1 2 3 4 5))
+        (joan (amb 1 2 3 4 5))
+        (kitty (amb 1 2 3 4 5))
+        (mary (amb 1 2 3 4 5)))
+    (require
+     (distinct? (list betty ethel joan kitty mary)))
+    (require (amb (= kitty 5) (= betty 3)))
+    (require (amb (= ethel 1) (= joan 2)))
+    (require (amb (= joan 3) (= ethel 5)))
+    (require (amb (= kitty 2) (= mary 4)))
+    (require (amb (= mary 4) (= 1 betty)))
+    (list (list 'baker baker)
+          (list 'cooper cooper)
+          (list 'fletcher fletcher)
+          (list 'miller miller)
+          (list 'smith smith))))

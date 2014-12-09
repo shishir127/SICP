@@ -1,0 +1,33 @@
+(define (create-list val length)
+  (if (<= length 1)
+      (list )
+      (cons null (create-list val (- length 1)))
+  )
+)
+
+(define (list-length seq)
+  (define (iter l n)
+    (if (null? l)
+	n
+	(iter (cdr l) (+ n 1))
+    )
+  )
+      (iter seq 0)
+)
+
+(define (multiple-dwelling vars conditions)
+  (define (iter tenants floors)
+    (if (null? tenants)
+	(begin (display floors)
+	       true
+	)
+	(for-each vars
+		  (lambda (x)
+		    (begin ()
+		    )
+		  )
+	)
+    )
+  )
+  (iter vars (create-list null (list-length vars)))
+)

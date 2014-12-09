@@ -1,0 +1,6 @@
+(define (all-pythagorean-triplets n)
+  (let ((i (an-integer-starting-from n)))
+    (let ((j (an-integer-starting-from i))
+      (let ((k (an-integer-starting-from j)))
+        (require (= (+ (* i i) (* j j)) (* k k)))
+        (list i j k)))))

@@ -1,0 +1,13 @@
+(define (for var start end step body)
+  (define (iter n exp)
+    (if (>= n end)
+	null
+	(begin (exp)
+	       (iter (+ n step) exp)
+	)
+    )
+    )
+  (begin (eval )
+    (iter start body)
+  )
+)
